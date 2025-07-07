@@ -1,0 +1,26 @@
+.explore-page {
+  padding: 2rem;
+}
+
+.explore-page h2 {
+  font-size: 2rem;
+  color: #5d5fef;
+  margin-bottom: 1.5rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filters select {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+.skill-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}

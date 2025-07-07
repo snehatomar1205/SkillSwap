@@ -1,0 +1,69 @@
+// src/App.js
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Explore from "./pages/Explore";
+import Requests from "./pages/Requests";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import MySkills from "./pages/MySkills";
+import Profile from "./pages/Profile";
+import CreateSkill from "./pages/CreateSkill";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
+
+function App() {
+  return (
+    <BrowserRouter>
+      {localStorage.getItem("token") && <Navbar />}
+
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Protected Routes */}
+        <Route
+          path="/explore"
+          element={
+            <ProtectedRoute>
+              <Explore />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/requests"
+          element={
+            <ProtectedRoute>
+              <Requests />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my-skills"
+          element={
+            <ProtectedRoute>
+              <MySkills />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create-skill"
+          element={
+            <ProtectedRoute>
+              <CreateSkill />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
