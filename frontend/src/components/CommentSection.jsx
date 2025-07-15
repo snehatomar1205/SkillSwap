@@ -1,4 +1,3 @@
-// src/components/CommentSection.jsx
 import React, { useEffect, useState } from "react";
 import { getComments, postComment } from "../services/api";
 
@@ -33,30 +32,41 @@ const CommentSection = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div style={styles.wrapper}>
-      <h4>Comments</h4>
+    <div className="mt-8 bg-gray-100 dark:bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Comments</h3>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <form onSubmit={handleSubmit} className="flex items-center gap-3 mb-6">
         <input
           type="text"
           placeholder="Write a comment..."
           value={text}
           onChange={(e) => setText(e.target.value)}
-          style={styles.input}
+          className="flex-grow px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-400 dark:bg-gray-700 dark:text-white"
         />
-        <button type="submit" style={styles.btn}>Post</button>
+        <button
+          type="submit"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg text-sm font-medium transition"
+        >
+          Post
+        </button>
       </form>
 
       {comments.length === 0 ? (
-        <p>No comments yet.</p>
+        <p className="text-gray-600 dark:text-gray-400">No comments yet.</p>
       ) : (
-        <ul style={styles.list}>
+        <ul className="space-y-4">
           {comments.map((c) => (
-            <li key={c._id} style={styles.comment}>
-              <img src={`http://localhost:5000/${c.userId.avatarUrl}`} alt="avatar" style={styles.avatar} />
+            <li key={c._id} className="flex items-start gap-4">
+              <img
+                src={c.userId.avatarUrl}
+                alt="avatar"
+                className="w-10 h-10 rounded-full border border-gray-400 object-cover"
+              />
               <div>
-                <strong>{c.userId.username}</strong>
-                <p>{c.text}</p>
+                <p className="text-sm font-semibold text-gray-800 dark:text-white">
+                  @{c.userId.username}
+                </p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">{c.text}</p>
               </div>
             </li>
           ))}
@@ -64,48 +74,6 @@ const CommentSection = ({ postId }) => {
       )}
     </div>
   );
-};
-
-const styles = {
-  wrapper: {
-    marginTop: "30px",
-    padding: "15px",
-    background: "#f8f8f8",
-    borderRadius: "8px",
-  },
-  form: {
-    display: "flex",
-    gap: "10px",
-    marginBottom: "20px",
-  },
-  input: {
-    flex: 1,
-    padding: "8px",
-    borderRadius: "5px",
-    border: "1px solid #ccc",
-  },
-  btn: {
-    padding: "8px 16px",
-    border: "none",
-    background: "#007bff",
-    color: "#fff",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  list: {
-    listStyle: "none",
-    padding: 0,
-  },
-  comment: {
-    display: "flex",
-    gap: "10px",
-    marginBottom: "12px",
-  },
-  avatar: {
-    width: "35px",
-    height: "35px",
-    borderRadius: "50%",
-  },
 };
 
 export default CommentSection;

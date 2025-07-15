@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { registerUser } from "../services/api";
 import { useNavigate, Link } from "react-router-dom";
- // Optional styling
+import { motion } from "framer-motion";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Register = () => {
     formData.append("email", form.email);
     formData.append("password", form.password);
     formData.append("bio", form.bio);
-    formData.append("avatar", form.avatar); // Must match multer's field name
+    formData.append("avatar", form.avatar);
 
     try {
       const res = await registerUser(formData);
@@ -44,9 +44,20 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit} className="auth-form">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4"
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-md bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl space-y-5 border border-gray-200 dark:border-gray-700"
+      >
+        <h2 className="text-2xl font-bold text-center text-indigo-600 dark:text-indigo-300">
+          Register on SkillSwap
+        </h2>
+
         <input
           type="text"
           name="username"
@@ -54,6 +65,7 @@ const Register = () => {
           value={form.username}
           onChange={handleChange}
           required
+          className="input-style"
         />
         <input
           type="email"
@@ -62,6 +74,7 @@ const Register = () => {
           value={form.email}
           onChange={handleChange}
           required
+          className="input-style"
         />
         <input
           type="password"
@@ -70,6 +83,7 @@ const Register = () => {
           value={form.password}
           onChange={handleChange}
           required
+          className="input-style"
         />
         <textarea
           name="bio"
@@ -77,21 +91,40 @@ const Register = () => {
           value={form.bio}
           onChange={handleChange}
           required
-        ></textarea>
+          rows={3}
+          className="input-style resize-none"
+        />
         <input
           type="file"
           name="avatar"
           accept="image/*"
           onChange={handleChange}
           required
+          className="block w-full text-sm text-gray-700 dark:text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200"
         />
-        <button type="submit">Register</button>
-        {error && <p className="error-text">{error}</p>}
+
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-200"
+        >
+          Register
+        </button>
+
+        {error && (
+          <p className="text-red-500 text-sm text-center font-medium">{error}</p>
+        )}
+
+        <p className="text-center text-sm text-gray-600 dark:text-gray-300">
+          Already have an account?{" "}
+          <Link
+            to="/"
+            className="text-indigo-600 hover:underline dark:text-indigo-400"
+          >
+            Login
+          </Link>
+        </p>
       </form>
-      <p>
-        Already have an account? <Link to="/">Login</Link>
-      </p>
-    </div>
+    </motion.div>
   );
 };
 

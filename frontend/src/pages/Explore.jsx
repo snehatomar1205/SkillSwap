@@ -1,7 +1,7 @@
-// src/pages/Explore.jsx
 import React, { useEffect, useState } from "react";
 import { fetchSkills } from "../services/api";
 import SkillCard from "../components/SkillCard";
+import { motion } from "framer-motion";
 
 const Explore = () => {
   const [skills, setSkills] = useState([]);
@@ -22,18 +22,26 @@ const Explore = () => {
   }, []);
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Explore Skills</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen px-6 py-10 bg-gray-50 dark:bg-gray-900"
+    >
+      <h2 className="text-3xl font-bold mb-6 text-center text-indigo-600 dark:text-indigo-300">
+        Explore Skills
+      </h2>
+
       {loading ? (
-        <p>Loading skills...</p>
+        <p className="text-center text-gray-600 dark:text-gray-300">Loading skills...</p>
       ) : (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {skills.map((skill) => (
             <SkillCard key={skill._id} skill={skill} />
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

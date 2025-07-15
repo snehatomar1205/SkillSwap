@@ -1,4 +1,4 @@
-// src/services/api.js
+
 const API_BASE = "http://localhost:5000/api";
 
 export const fetchSkills = async () => {
@@ -7,11 +7,12 @@ export const fetchSkills = async () => {
 };
 
 export const requestSkillSwap = async (skillPostId, hoursRequested) => {
+  const token = localStorage.getItem("token");
   const res = await fetch("http://localhost:5000/api/requests", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("token"),
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ skillPostId, hoursRequested }),
   });
@@ -90,28 +91,30 @@ export const createSkillPost = async (formData) => {
   return data;
 };
 
-// src/services/api.js
-
-// Comments
 export const getComments = async (postId) => {
   const res = await fetch(`http://localhost:5000/api/comments/${postId}`);
   if (!res.ok) throw new Error("Failed to fetch comments");
   return res.json();
 };
 
+
 export const postComment = async (postId, text) => {
   const token = localStorage.getItem("token");
+
   const res = await fetch(`http://localhost:5000/api/comments/${postId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`, 
     },
     body: JSON.stringify({ text }),
   });
-  if (!res.ok) throw new Error("Failed to post comment");
-  return res.json();
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.msg);
+  return data;
 };
+
 
 export const fetchSingleSkill = async (id) => {
   const res = await fetch(`http://localhost:5000/api/skills/${id}`);
@@ -136,6 +139,6 @@ export const registerUser = async (formData) => {
     }
   }
 
-  return res.json(); // Only parse if successful and is JSON
+  return res.json(); 
 };
 

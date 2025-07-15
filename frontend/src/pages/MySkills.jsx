@@ -1,7 +1,7 @@
-// src/pages/MySkills.jsx
 import React, { useEffect, useState } from "react";
 import { fetchMySkills, deleteSkill } from "../services/api";
 import MySkillCard from "../components/MySkillCard";
+import { motion } from "framer-motion";
 
 const MySkills = () => {
   const [skills, setSkills] = useState([]);
@@ -34,18 +34,28 @@ const MySkills = () => {
   }, []);
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>My Skills</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen px-6 py-10 bg-gray-50 dark:bg-gray-900"
+    >
+      <h2 className="text-3xl font-bold mb-6 text-indigo-600 dark:text-indigo-300 text-center">
+        My Skills
+      </h2>
+
       {skills.length === 0 ? (
-        <p>You haven't posted any skills yet.</p>
+        <p className="text-center text-gray-600 dark:text-gray-300">
+          You haven’t posted any skills yet.
+        </p>
       ) : (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {skills.map((skill) => (
             <MySkillCard key={skill._id} skill={skill} onDelete={handleDelete} />
           ))}
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
