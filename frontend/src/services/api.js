@@ -142,3 +142,14 @@ export const registerUser = async (formData) => {
   return res.json(); 
 };
 
+export const fetchChatMessages = async (roomId) => {
+  const res = await fetch(`http://localhost:5000/api/chat/${roomId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to load messages");
+  return res.json();
+};
+

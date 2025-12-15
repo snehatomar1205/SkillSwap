@@ -1,9 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const RequestCard = ({ request, isReceiver, onUpdate }) => {
-  const { skillPostId, fromUser, toUser, hoursRequested, status, _id } = request;
+  const { skillPostId, fromUser, toUser, hoursRequested, status, _id } =
+    request;
   const otherUser = isReceiver ? fromUser : toUser;
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -19,7 +22,9 @@ const RequestCard = ({ request, isReceiver, onUpdate }) => {
           className="w-10 h-10 rounded-full object-cover border"
         />
         <div>
-          <h4 className="font-semibold text-gray-800 dark:text-white">@{otherUser.username}</h4>
+          <h4 className="font-semibold text-gray-800 dark:text-white">
+            @{otherUser.username}
+          </h4>
           <p className="text-xs text-gray-500">
             {isReceiver ? "requested your skill" : "you requested"}
           </p>
@@ -35,7 +40,8 @@ const RequestCard = ({ request, isReceiver, onUpdate }) => {
           ⏱ {hoursRequested} hour(s)
         </p>
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          Status: <b className="capitalize text-black dark:text-white">{status}</b>
+          Status:{" "}
+          <b className="capitalize text-black dark:text-white">{status}</b>
         </p>
       </div>
 
@@ -55,6 +61,14 @@ const RequestCard = ({ request, isReceiver, onUpdate }) => {
             Decline
           </button>
         </div>
+      )}
+      {status === "accepted" && request.chatRoomId && (
+        <button
+          onClick={() => navigate(`/chat/${request.chatRoomId}`)}
+          className="mt-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm"
+        >
+          💬 Chat Now
+        </button>
       )}
     </motion.div>
   );

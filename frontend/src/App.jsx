@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import SkillDetails from "./pages/SkillDetails";
+import Chat from "./pages/Chat";
 
 function App() {
   const { token } = useContext(AuthContext);
@@ -72,6 +73,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SkillDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/chat/:roomId"
+            element={
+              <ProtectedRoute>
+                <Chat />
               </ProtectedRoute>
             }
           />

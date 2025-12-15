@@ -29,6 +29,10 @@ const exchangeRequestSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  chatRoomId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ChatRoom",
+  },
 });
 
 module.exports = mongoose.model("ExchangeRequest", exchangeRequestSchema);
