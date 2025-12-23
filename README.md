@@ -7,7 +7,7 @@ SkillSwap is a **full-stack MERN application** that allows users to exchange ski
 
 ## 🎥 Working Demo / Tutorial
 👉 **Complete working walkthrough:**  
-https://drive.google.com/file/d/1Y-ZI_ckt-_s4e9uimxXliEDFsClcGzLf/view?usp=sharing
+https://youtu.be/WthbLqcGbcM
 
 ---
 
@@ -21,7 +21,7 @@ https://drive.google.com/file/d/1Y-ZI_ckt-_s4e9uimxXliEDFsClcGzLf/view?usp=shari
 ---
 
 ### 🧠 Skill Marketplace
-- Create, update, and delete skill posts
+- Create and delete skill posts
 - Browse and explore skills offered by other users
 - Each skill is valued using **time credits**, not currency
 
@@ -109,9 +109,6 @@ https://drive.google.com/file/d/1Y-ZI_ckt-_s4e9uimxXliEDFsClcGzLf/view?usp=shari
 **Sneha**  
 2nd Year Computer Science Student  
 Focused on Full-Stack Development & Problem Solving  
-
-🔗 GitHub: *Add your GitHub profile link*  
-🔗 LinkedIn: *Add your LinkedIn profile link*
 
 ---
 
